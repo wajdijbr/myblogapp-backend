@@ -1,31 +1,28 @@
 package com.blog.demo.Entities;
 
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "users")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class User implements Serializable {
-    @Id()
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idUser;
-    private String nomUser;
-    private String prenomUser;
-    private String Role;
-    private String mailUser;
-    private String passwordUser;
-    private Date dateCUser;
+    private Long user_id;
+    @Column(unique = true)
+    private String username;
+    private String password;
+    private Boolean enabled;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
 
 }

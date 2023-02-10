@@ -6,15 +6,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-import com.blog.demo.Entities.User;
+import com.blog.demo.Entities.Role;
 
 @RepositoryRestResource
-public interface UserRepos extends JpaRepository<User, Long> {
-    User findByUsername(String username);
+public interface RoleRepos extends JpaRepository<Role, Long> {
+    Role findByRole(String role);
 
-    public List<User> findAll();
+    public List<Role> findAll();
 
-    public static User saveUser(User user) {
+    public static Role saveUser(Role role) {
         return null;
     }
 }
